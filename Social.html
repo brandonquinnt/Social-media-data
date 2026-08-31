@@ -36,26 +36,64 @@ text-shadow:
 color:#aaa;
 margin:5px 0 18px
 }
-/* BUTTONS */
+/* MAIN TOGGLE BUTTONS */
 .tabs{
 display:flex;
 gap:8px;
-margin-bottom:14px
+margin-bottom:10px
 }
 button{
-border:1px solid #333 !important;
-background:#111 !important;
+border:1px solid rgba(255,255,255,.13) !important;
+background:rgba(255,255,255,.055) !important;
 color:#fff !important;
-border-radius:12px;
+border-radius:16px;
 padding:11px 20px;
 font-weight:700;
-font-size:15px
+font-size:15px;
+box-shadow:
+inset 0 1px 1px rgba(255,255,255,.08),
+0 3px 10px rgba(0,0,0,.3);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+cursor:pointer;
+transition:all .18s ease
 }
 button.active{
-background:#e21b23 !important;
+background:rgba(226,27,35,.88) !important;
 color:#fff !important;
-border-color:#e21b23 !important;
-box-shadow:0 0 14px rgba(226,27,35,.4)
+border-color:rgba(255,255,255,.18) !important;
+box-shadow:
+inset 0 1px 2px rgba(255,255,255,.16),
+0 4px 14px rgba(226,27,35,.35);
+transform:translateY(-1px)
+}
+button:active{
+transform:scale(.97)
+}
+/* YEAR FILTER */
+.year-tabs{
+display:flex;
+gap:8px;
+margin-bottom:14px;
+padding:4px;
+border-radius:22px;
+background:rgba(255,255,255,.035);
+border:1px solid rgba(255,255,255,.08);
+box-shadow:inset 0 1px 1px rgba(255,255,255,.05);
+}
+.year-tabs button{
+flex:1;
+padding:10px 12px;
+font-size:14px;
+border-radius:17px;
+background:rgba(255,255,255,.035) !important;
+box-shadow:none;
+}
+.year-tabs button.active{
+background:rgba(226,27,35,.88) !important;
+box-shadow:
+inset 0 1px 2px rgba(255,255,255,.15),
+0 3px 10px rgba(226,27,35,.3);
 }
 /* CARDS */
 .card{
@@ -187,9 +225,7 @@ display:block;
 background:#0d0d0d !important;
 border-radius:12px
 }
-/* =========================================
-   IPHONE / GLASS STYLE SLIDER
-   ========================================= */
+/* SLIDER GLASS CONTAINER */
 .slider-wrap{
 margin-top:20px;
 padding:13px 15px;
@@ -213,7 +249,7 @@ background:transparent;
 accent-color:#e21b23;
 cursor:pointer;
 }
-/* SAFARI / IPHONE TRACK */
+/* SLIDER TRACK */
 input[type="range"]::-webkit-slider-runnable-track{
 height:14px;
 border-radius:999px;
@@ -228,7 +264,7 @@ box-shadow:
 inset 0 1px 3px rgba(0,0,0,.5),
 0 1px 2px rgba(255,255,255,.08);
 }
-/* SAFARI / IPHONE THUMB */
+/* SLIDER THUMB */
 input[type="range"]::-webkit-slider-thumb{
 -webkit-appearance:none;
 appearance:none;
@@ -250,11 +286,10 @@ backdrop-filter:blur(8px);
 -webkit-backdrop-filter:blur(8px);
 transition:transform .15s ease;
 }
-/* THUMB GETS SLIGHTLY BIGGER WHILE DRAGGING */
 input[type="range"]:active::-webkit-slider-thumb{
-transform:scale(1.12);
+transform:scale(1.12)
 }
-/* FIREFOX TRACK */
+/* FIREFOX */
 input[type="range"]::-moz-range-track{
 height:14px;
 border-radius:999px;
@@ -265,11 +300,7 @@ rgba(226,27,35,.95),
 rgba(226,27,35,.72)
 );
 border:1px solid rgba(255,255,255,.16);
-box-shadow:
-inset 0 1px 3px rgba(0,0,0,.5),
-0 1px 2px rgba(255,255,255,.08);
 }
-/* FIREFOX THUMB */
 input[type="range"]::-moz-range-thumb{
 width:32px;
 height:32px;
@@ -326,21 +357,28 @@ grid-template-columns:1fr
 h1{
 font-size:27px
 }
-/* Larger touch area on iPhone */
+.year-tabs{
+gap:6px;
+padding:4px
+}
+.year-tabs button{
+font-size:13px;
+padding:10px 5px
+}
 .slider-wrap{
 padding:14px 13px;
-border-radius:26px;
+border-radius:26px
 }
 input[type="range"]{
-height:52px;
+height:52px
 }
 input[type="range"]::-webkit-slider-runnable-track{
-height:15px;
+height:15px
 }
 input[type="range"]::-webkit-slider-thumb{
 width:34px;
 height:34px;
-margin-top:-9.5px;
+margin-top:-9.5px
 }
 }
 </style>
@@ -351,31 +389,62 @@ margin-top:-9.5px;
 <div class="sub">
 Social Media Data • Interactive Monthly Performance
 </div>
+<!-- VIEWS / FOLLOWERS -->
 <div class="tabs">
-<button id="viewsBtn" class="active">Views</button>
-<button id="followersBtn">Followers</button>
+<button id="viewsBtn" class="active">
+Views
+</button>
+<button id="followersBtn">
+Followers
+</button>
+</div>
+<!-- YEAR FILTER -->
+<div class="year-tabs">
+<button id="year2025Btn">
+2025
+</button>
+<button id="year2026Btn" class="active">
+2026
+</button>
+<button id="allTimeBtn">
+All Time
+</button>
 </div>
 <div class="card">
 <h2 id="month"></h2>
 <div class="metrics" id="metrics"></div>
 <canvas id="chart" width="860" height="380"></canvas>
 <div class="legend">
-<span><i class="dot" style="background:#d62976"></i>Instagram</span>
-<span><i class="dot" style="background:#1877f2"></i>Facebook</span>
-<span><i class="dot" style="background:#fff"></i>TikTok</span>
+<span>
+<i class="dot" style="background:#d62976"></i>
+Instagram
+</span>
+<span>
+<i class="dot" style="background:#1877f2"></i>
+Facebook
+</span>
+<span>
+<i class="dot" style="background:#fff"></i>
+TikTok
+</span>
 </div>
+<!-- SLIDER -->
 <div class="slider-wrap">
 <input
 id="slider"
 type="range"
 min="0"
-max="19"
-value="19"
+max="7"
+value="7"
 step="1"
 >
 <div class="ends">
-<span>Jan '25</span>
-<span>Aug '26</span>
+<span id="sliderStart">
+Jan '26
+</span>
+<span id="sliderEnd">
+Aug '26
+</span>
 </div>
 </div>
 </div>
@@ -447,7 +516,9 @@ step="1"
 </div>
 </div>
 <div class="year">
-<h3 id="followersYtdTitle">2026 Current Followers</h3>
+<h3 id="followersYtdTitle">
+2026 Current Followers
+</h3>
 <div class="yearrow">
 <span>Instagram</span>
 <b id="igFollowers2026"></b>
@@ -520,6 +591,7 @@ const months=[
 "Jan '26","Feb '26","Mar '26","Apr '26","May '26","Jun '26",
 "Jul '26","Aug '26"
 ];
+/* DATA */
 const views={
 Instagram:[
 10000,16000,19000,54000,24000,37000,
@@ -560,8 +632,13 @@ TikTok:[
 3900,4600
 ]
 };
+/* STATE */
 let mode="views";
 let index=19;
+let yearMode="2026";
+let rangeStart=12;
+let rangeEnd=19;
+/* FORMAT NUMBER */
 function formatNumber(n){
 if(n>=1000000)
 return (n/1000000).toFixed(n%1000000?1:0)+"M";
@@ -569,22 +646,83 @@ if(n>=1000)
 return (n/1000).toFixed(n%1000?1:0)+"K";
 return n.toLocaleString();
 }
+/* SUM */
 function sum(arr,start,end){
 let total=0;
 for(let i=start;i<=end;i++)
 total+=arr[i];
 return total;
 }
+/* SET YEAR RANGE */
+function setYearRange(modeName){
+yearMode=modeName;
+if(modeName==="2025"){
+rangeStart=0;
+rangeEnd=11;
+index=11;
+}
+else if(modeName==="2026"){
+rangeStart=12;
+rangeEnd=19;
+index=19;
+}
+else{
+rangeStart=0;
+rangeEnd=19;
+index=19;
+}
+/* UPDATE SLIDER */
+let slider=document.getElementById("slider");
+slider.min=rangeStart;
+slider.max=rangeEnd;
+slider.value=index;
+/* UPDATE LABELS */
+document.getElementById("sliderStart").textContent=
+months[rangeStart];
+document.getElementById("sliderEnd").textContent=
+months[rangeEnd];
+/* UPDATE BUTTONS */
+document.getElementById("year2025Btn").className=
+modeName==="2025" ? "active" : "";
+document.getElementById("year2026Btn").className=
+modeName==="2026" ? "active" : "";
+document.getElementById("allTimeBtn").className=
+modeName==="all" ? "active" : "";
+draw();
+}
+/* YEAR BUTTONS */
+document.getElementById("year2025Btn").addEventListener(
+"click",
+function(){
+setYearRange("2025");
+}
+);
+document.getElementById("year2026Btn").addEventListener(
+"click",
+function(){
+setYearRange("2026");
+}
+);
+document.getElementById("allTimeBtn").addEventListener(
+"click",
+function(){
+setYearRange("all");
+}
+);
 /* YEAR TOTALS */
 function updateYearTotals(){
 let ig25=sum(views.Instagram,0,11);
 let fb25=sum(views.Facebook,0,11);
 let tt25=sum(views.TikTok,0,11);
-document.getElementById("ig2025").textContent=formatNumber(ig25);
-document.getElementById("fb2025").textContent=formatNumber(fb25);
-document.getElementById("tt2025").textContent=formatNumber(tt25);
+document.getElementById("ig2025").textContent=
+formatNumber(ig25);
+document.getElementById("fb2025").textContent=
+formatNumber(fb25);
+document.getElementById("tt2025").textContent=
+formatNumber(tt25);
 document.getElementById("total2025").textContent=
 formatNumber(ig25+fb25+tt25);
+/* 2026 */
 let ig26=0;
 let fb26=0;
 let tt26=0;
@@ -593,11 +731,15 @@ ig26=sum(views.Instagram,12,index);
 fb26=sum(views.Facebook,12,index);
 tt26=sum(views.TikTok,12,index);
 }
-document.getElementById("ig2026").textContent=formatNumber(ig26);
-document.getElementById("fb2026").textContent=formatNumber(fb26);
-document.getElementById("tt2026").textContent=formatNumber(tt26);
+document.getElementById("ig2026").textContent=
+formatNumber(ig26);
+document.getElementById("fb2026").textContent=
+formatNumber(fb26);
+document.getElementById("tt2026").textContent=
+formatNumber(tt26);
 document.getElementById("total2026").textContent=
 formatNumber(ig26+fb26+tt26);
+/* FOLLOWERS 2025 */
 let igFollowers25=followers.Instagram[11];
 let fbFollowers25=followers.Facebook[11];
 let ttFollowers25=followers.TikTok[11];
@@ -613,6 +755,7 @@ igFollowers25+
 fbFollowers25+
 ttFollowers25
 );
+/* FOLLOWERS 2026 */
 let igFollowers26=0;
 let fbFollowers26=0;
 let ttFollowers26=0;
@@ -634,7 +777,7 @@ fbFollowers26+
 ttFollowers26
 );
 }
-/* MONTH TO MONTH GAINS */
+/* MONTH GAINS */
 function updateGains(){
 if(index===0){
 document.getElementById("gainMonth").textContent=
@@ -686,8 +829,15 @@ el.textContent="0";
 }
 /* MAIN DISPLAY */
 function draw(){
-let data=mode==="views"?views:followers;
-let names=["Instagram","Facebook","TikTok"];
+let data=
+mode==="views"
+?views
+:followers;
+let names=[
+"Instagram",
+"Facebook",
+"TikTok"
+];
 let vals=names.map(function(n){
 return data[n][index];
 });
@@ -710,7 +860,11 @@ box.innerHTML+=
 box.innerHTML+=
 '<div class="metric total">'+
 '<small>Total</small>'+
-'<b>'+formatNumber(vals[0]+vals[1]+vals[2])+'</b>'+
+'<b>'+
+formatNumber(
+vals[0]+vals[1]+vals[2]
+)+
+'</b>'+
 '</div>';
 drawChart(data,names);
 updateYearTotals();
@@ -728,26 +882,52 @@ let T=20;
 let B=45;
 let PW=W-L-R;
 let PH=H-T-B;
-ctx.clearRect(0,0,W,H);
+ctx.clearRect(
+0,
+0,
+W,
+H
+);
+/* DATA FOR SELECTED RANGE */
 let all=[];
 names.forEach(function(n){
-all=all.concat(data[n]);
+for(
+let k=rangeStart;
+k<=rangeEnd;
+k++
+){
+all.push(data[n][k]);
+}
 });
 let max=Math.max.apply(null,all)||1;
-/* BLACK CHART */
+/* CHART BACKGROUND */
 ctx.fillStyle="#0d0d0d";
-ctx.fillRect(L,T,PW,PH);
+ctx.fillRect(
+L,
+T,
+PW,
+PH
+);
 /* GRID */
 ctx.font="12px Arial";
 ctx.fillStyle="#777";
 ctx.strokeStyle="#292929";
 ctx.lineWidth=1;
 for(let g=0;g<=4;g++){
-let y=T+PH*g/4;
-let value=max*(1-g/4);
+let y=
+T+
+PH*g/4;
+let value=
+max*(1-g/4);
 ctx.beginPath();
-ctx.moveTo(L,y);
-ctx.lineTo(W-R,y);
+ctx.moveTo(
+L,
+y
+);
+ctx.lineTo(
+W-R,
+y
+);
 ctx.stroke();
 ctx.fillText(
 formatNumber(value),
@@ -755,7 +935,7 @@ formatNumber(value),
 y+4
 );
 }
-/* PLATFORM COLORS */
+/* PLATFORM LINES */
 let colors=[
 "#d62976",
 "#1877f2",
@@ -766,17 +946,51 @@ let arr=data[name];
 ctx.strokeStyle=colors[j];
 ctx.lineWidth=3;
 ctx.beginPath();
-arr.forEach(function(value,k){
-let x=L+PW*k/19;
-let y=T+PH-(value/max)*PH;
-if(k===0)
+let points=
+rangeEnd-rangeStart;
+for(
+let k=rangeStart;
+k<=rangeEnd;
+k++
+){
+let position=
+k-rangeStart;
+let x=
+L+
+PW*
+(
+points===0
+?0
+:position/points
+);
+let y=
+T+
+PH-
+(arr[k]/max)*PH;
+if(k===rangeStart)
 ctx.moveTo(x,y);
 else
 ctx.lineTo(x,y);
-});
+}
 ctx.stroke();
-let x=L+PW*index/19;
-let y=T+PH-(arr[index]/max)*PH;
+/* CURRENT MONTH DOT */
+if(index>=rangeStart && index<=rangeEnd){
+let position=
+index-rangeStart;
+let points=
+rangeEnd-rangeStart;
+let x=
+L+
+PW*
+(
+points===0
+?0
+:position/points
+);
+let y=
+T+
+PH-
+(arr[index]/max)*PH;
 ctx.fillStyle=colors[j];
 ctx.beginPath();
 ctx.arc(
@@ -787,6 +1001,7 @@ y,
 Math.PI*2
 );
 ctx.fill();
+}
 });
 }
 /* SLIDER */
@@ -817,7 +1032,8 @@ document.getElementById("viewsBtn").className="";
 draw();
 }
 );
-draw();
+/* INITIAL DISPLAY */
+setYearRange("2026");
 </script>
 </body>
 </html>
