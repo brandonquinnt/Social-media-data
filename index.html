@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest"><title>Social Media Data</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f5f7;color:#111;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:900px;margin:auto;padding:22px 16px 35px}h1{margin:0;font-size:30px}.sub{color:#666;margin:4px 0 18px}.tabs{display:flex;gap:8px;margin-bottom:12px}button{border:1px solid #d7d7d7;background:#fff;color:#111;border-radius:12px;padding:11px 20px;font-weight:700;font-size:15px}button.active{background:#111;color:#fff}.card{background:#fff;border:1px solid #ddd;border-radius:20px;padding:16px}h2{margin:0 0 13px;font-size:21px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.metric{background:#f5f5f6;border-radius:14px;padding:12px}.metric span{display:block;color:#666;font-size:12px}.metric b{font-size:22px;display:block;margin-top:3px}canvas{width:100%;height:auto;margin-top:16px;display:block}input{width:100%;height:38px;margin-top:10px;accent-color:#111}.ends{display:flex;justify-content:space-between;color:#777;font-size:12px}@media(max-width:600px){.metrics{grid-template-columns:repeat(2,1fr)}h1{font-size:27px}}
+</style></head><body><main><h1>Social Media Data</h1><div class=sub>Interactive monthly performance</div>
+<div class=tabs><button id=v class=active type=button>Views</button><button id=f type=button>Followers</button></div>
+<div class=card><h2 id=m></h2><div class=metrics id=n></div><canvas id=c width="860" height="380"></canvas><input id=r type=range min="0" max="19" value="19"><div class=ends><span>Jan '25</span><span>Aug '26</span></div></div></main>
+<script>
+const X={"months":["Jan '25","Feb '25","Mar '25","Apr '25","May '25","Jun '25","Jul '25","Aug '25","Sep '25","Oct '25","Nov '25","Dec '25","Jan '26","Feb '26","Mar '26","Apr '26","May '26","Jun '26","Jul '26","Aug '26"],"views":{"Instagram":[10000,16000,19000,54000,24000,37000,123000,301000,457000,3100000,3000000,2900000,1600000,2400000,921000,806000,593000,893000,911000,3300000],"Facebook":[2600,1700,4400,2100,2400,2700,6000,505000,3700000,3600000,1500000,2400000,1500000,2500000,1500000,1600000,1500000,2600000,6700000,8400000],"TikTok":[3000,1900,2200,1200,2600,3000,3300,5500,7500,203000,1100000,143000,229000,200000,276000,330000,200000,150000,170000,100000]},"followers":{"Instagram":[1500,1600,1800,1900,2700,2900,3000,3200,3300,3800,6200,8300,11000,13000,15000,16000,17000,18000,20000,22600],"Facebook":[2800,2900,3000,3000,3100,3100,3200,3300,3300,3400,3500,8000,10000,13000,15000,17300,18800,20000,22300,29200],"TikTok":[0,0,0,0,10,40,50,78,150,700,1400,1700,2000,2200,2900,3200,3500,3700,3900,4600]}};let mode='views',i=19;
+const names=['Instagram','Facebook','TikTok'],cols=['#111','#666','#aaa'];
+const fmt=n=>n>=1e6?(n/1e6).toFixed(n%1e6?1:0)+'M':n>=1e3?(n/1e3).toFixed(n%1e3?1:0)+'K':n.toLocaleString();
+function draw(){
+let d=X[mode],vals=names.map(x=>d[x][i]);m.textContent=X.months[i];
+n.innerHTML=names.map((x,j)=>'<div class="metric"><span>'+x+'</span><b>'+fmt(vals[j])+'</b></div>').join('')+'<div class="metric"><span>Total</span><b>'+fmt(vals[0]+vals[1]+vals[2])+'</b></div>';
+let ctx=c.getContext('2d'),W=c.width,H=c.height,L=58,R=18,T=18,B=42,PW=W-L-R,PH=H-T-B;ctx.clearRect(0,0,W,H);
+let all=names.flatMap(x=>d[x]),mx=Math.max(...all)||1;ctx.fillStyle='#fafafa';ctx.fillRect(L,T,PW,PH);ctx.font='12px Arial';ctx.fillStyle='#777';ctx.strokeStyle='#e5e5e5';
+for(let g=0;g<=4;g++){let y=T+PH*g/4;ctx.beginPath();ctx.moveTo(L,y);ctx.lineTo(W-R,y);ctx.stroke();ctx.fillText(fmt(mx*(1-g/4)),5,y+4)}
+names.forEach((x,j)=>{let a=d[x];ctx.strokeStyle=cols[j];ctx.lineWidth=3;ctx.beginPath();a.forEach((z,k)=>{let px=L+PW*k/19,py=T+PH-z/mx*PH;k?ctx.lineTo(px,py):ctx.moveTo(px,py)});ctx.stroke();let px=L+PW*i/19,py=T+PH-a[i]/mx*PH;ctx.fillStyle=cols[j];ctx.beginPath();ctx.arc(px,py,6,0,7);ctx.fill()})}
+r.oninput=e=>{i=+e.target.value;draw()};v.onclick=()=>{mode='views';v.className='active';f.className='';draw()};f.onclick=()=>{mode='followers';f.className='active';v.className='';draw()};draw();
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script></body></html>
