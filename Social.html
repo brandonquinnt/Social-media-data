@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Social Media Data</title>
+<style>
+body{margin:0;background:#f4f5f7;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#111}
+main{max-width:850px;margin:auto;padding:24px 16px}
+h1{font-size:30px;margin:0}.sub{color:#666;margin:5px 0 20px}
+button{padding:11px 20px;border:1px solid #ddd;border-radius:12px;background:white;font-weight:700;font-size:15px}
+button.active{background:#111;color:white}
+.tabs{display:flex;gap:8px;margin-bottom:14px}
+.card{background:white;border:1px solid #ddd;border-radius:20px;padding:16px}
+h2{margin:0 0 14px}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.num{background:#f5f5f6;border-radius:13px;padding:12px}
+.num small{color:#666}.num b{display:block;font-size:21px;margin-top:4px}
+canvas{width:100%;height:auto;margin-top:18px}
+input{width:100%;height:36px;margin-top:10px;accent-color:#111}
+.ends{display:flex;justify-content:space-between;color:#777;font-size:12px}
+@media(max-width:600px){.nums{grid-template-columns:repeat(2,1fr)}h1{font-size:27px}}
+</style>
+</head>
+
+<body>
+<main>
+<h1>Social Media Data</h1>
+<div class="sub">Interactive monthly performance</div>
+
+<div class="tabs">
+<button id="v" class="active">Views</button>
+<button id="f">Followers</button>
+</div>
+
+<div class="card">
+<h2 id="month"></h2>
+<div class="nums" id="numbers"></div>
+<canvas id="chart" width="860" height="380"></canvas>
+<input id="slider" type="range" min="0" max="19" value="19">
+<div class="ends"><span>Jan '25</span><span>Aug '26</span></div>
+</div>
+</main>
+
+<script>
+const months=["Jan '25","Feb '25","Mar '25","Apr '25","May '25","Jun '25","Jul '25","Aug '25","Sep '25","Oct '25","Nov '25","Dec '25","Jan '26","Feb '26","Mar '26","Apr '26","May '26","Jun '26","Jul '26","Aug '26"];
+
+const views={
+Instagram:[10000,16000,19000,54000,24000,37000,123000,301000,457000,3100000,3000000,2900000,1600000,2400000,921000,806000,593000,893000,911000,3300000],
+Facebook:[2600,1700,4400,2100,2400,2700,6000,505000,3700000,3600000,1500000,2400000,1500000,2500000,1500000,1600000,1500000,2600000,6700000,8400000],
+TikTok:[3000,1900,2200,1200,2600,3000,3300,5500,7500,203000,1100000,143000,229000,200000,276000,330000,200000,150000,170000,100000]
+};
+
+const followers={
+Instagram:[1500,1600,1800,1900,2700,2900,3000,3200,3300,3800,6200,8300,11000,13000,15000,16000,17000,18000,20000,22600],
+Facebook:[2800,2900,3000,3000,3100,3100,3200,3300,3300,3400,3500,8000,10000,13000,15000,17300,18800,20000,22300,29200],
+TikTok:[0,0,0,0,10,40,50,78,150,700,1400,1700,2000,2200,2900,3200,3500,3700,3900,4600]
+};
+
+let mode="views",i=19;
+
+function fmt(n){
+ if(n>=1000000)return (n/1000000).toFixed(n%1000000?1:0)+"M";
+ if(n>=1000)return (n/1000).toFixed(n%1000?1:0)+"K";
+ return n.toLocaleString();
+}
+
+function draw(){
+ let d=mode==="views"?views:followers;
+ let names=["Instagram","Facebook","TikTok"];
+ let vals=names.map(x=>d[x][i]);
+
+ document.getElementById("month").textContent=months[i];
+
+ let box=document.getElementById("numbers");
+ box.innerHTML="";
+
+ names.forEach((x,j)=>{
+  box.innerHTML+=
+  '<div class="num"><small>'+x+
+  '</small><b>'+fmt(vals[j])+'</b></div>';
+ });
+
+ box.innerHTML+=
+ '<div class="num"><small>Total</small><b>'+
+ fmt(vals[0]+vals[1]+vals[2])+
+ '</b></div>';
+
+ let c=document.getElementById("chart");
+ let ctx=c.getContext("2d");
+ let W=c.width,H=c.height;
+ let L=60,R=20,T=20,B=45;
+ let PW=W-L-R,PH=H-T-B;
+
+ ctx.clearRect(0,0,W,H);
+
+ let all=[];
+ names.forEach(x=>all=all.concat(d[x]));
+ let max=Math.max(...all)||1;
+
+ ctx.fillStyle="#fafafa";
+ ctx.fillRect(L,T,PW,PH);
+
+ ctx.font="12px Arial";
+ ctx.fillStyle="#777";
+ ctx.strokeStyle="#e5e5e5";
+ ctx.lineWidth=1;
+
+ for(let g=0;g<=4;g++){
+  let y=T+PH*g/4;
+  let val=max*(1-g/4);
+
+  ctx.beginPath();
+  ctx.moveTo(L,y);
+  ctx.lineTo(W-R,y);
+  ctx.stroke();
+
+  ctx.fillText(fmt(val),5,y+4);
+ }
+
+ let colors=["#111","#666","#aaa"];
+
+ names.forEach((name,j)=>{
+  let a=d[name];
+
+  ctx.strokeStyle=colors[j];
+  ctx.lineWidth=3;
+  ctx.beginPath();
+
+  a.forEach((val,k)=>{
+   let x=L+PW*k/19;
+   let y=T+PH-(val/max)*PH;
+
+   if(k===0)ctx.moveTo(x,y);
+   else ctx.lineTo(x,y);
+  });
+
+  ctx.stroke();
+
+  let x=L+PW*i/19;
+  let y=T+PH-(a[i]/max)*PH;
+
+  ctx.fillStyle=colors[j];
+  ctx.beginPath();
+  ctx.arc(x,y,6,0,Math.PI*2);
+  ctx.fill();
+ });
+}
+
+document.getElementById("slider").addEventListener("input",function(){
+ i=Number(this.value);
+ draw();
+});
+
+document.getElementById("v").addEventListener("click",function(){
+ mode="views";
+ this.className="active";
+ document.getElementById("f").className="";
+ draw();
+});
+
+document.getElementById("f").addEventListener("click",function(){
+ mode="followers";
+ this.className="active";
+ document.getElementById("v").className="";
+ draw();
+});
+
+draw();
+</script>
+</body>
+</html>
