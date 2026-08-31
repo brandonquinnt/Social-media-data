@@ -27,364 +27,466 @@ h2{margin:0 0 14px;font-size:21px}
 .year h3{margin:0 0 10px;font-size:17px}
 .yearrow{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #ddd;font-size:14px}
 .yearrow:last-child{border-bottom:0;font-weight:800}
+.gainbox{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gain{border-radius:15px;padding:15px;background:#f7f7f7}
+.gain h3{margin:0 0 10px;font-size:17px}
+.gainrow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #ddd;font-size:14px}
+.gainrow:last-child{border-bottom:0;font-weight:800}
+.positive{font-weight:800}
+.negative{font-weight:800}
 canvas{width:100%;height:auto;margin-top:18px;display:block}
 input{width:100%;height:38px;margin-top:10px;accent-color:#111}
 .ends{display:flex;justify-content:space-between;color:#777;font-size:12px}
 .legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;font-size:13px}
 .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+.note{font-size:13px;color:#777;margin-top:-5px;margin-bottom:12px}
 @media(max-width:600px){
 .metrics{grid-template-columns:repeat(2,1fr)}
-.yearbox{grid-template-columns:1fr}
+.yearbox,.gainbox{grid-template-columns:1fr}
 h1{font-size:27px}
 }
 </style>
 </head>
-
 <body>
 <main>
-
 <h1>Social Media Data</h1>
 <div class="sub">Interactive monthly performance</div>
-
 <div class="tabs">
 <button id="viewsBtn" class="active">Views</button>
 <button id="followersBtn">Followers</button>
 </div>
-
 <div class="card">
 <h2 id="month"></h2>
 <div class="metrics" id="metrics"></div>
-
 <canvas id="chart" width="860" height="380"></canvas>
-
 <div class="legend">
 <span><i class="dot" style="background:#d62976"></i>Instagram</span>
 <span><i class="dot" style="background:#1877f2"></i>Facebook</span>
 <span><i class="dot" style="background:#111"></i>TikTok</span>
 </div>
-
 <input id="slider" type="range" min="0" max="19" value="19" step="1">
-
 <div class="ends">
 <span>Jan '25</span>
 <span>Aug '26</span>
 </div>
 </div>
-
+<!-- YEARLY TOTALS -->
 <div class="card">
 <h2>Year-to-Date & Annual Totals</h2>
 <div class="yearbox">
-
 <div class="year">
 <h3>2025 Total Views</h3>
-<div class="yearrow"><span>Instagram</span><b id="ig2025"></b></div>
-<div class="yearrow"><span>Facebook</span><b id="fb2025"></b></div>
-<div class="yearrow"><span>TikTok</span><b id="tt2025"></b></div>
-<div class="yearrow"><span>Total Views</span><b id="total2025"></b></div>
+<div class="yearrow">
+<span>Instagram</span>
+<b id="ig2025"></b>
 </div>
-
+<div class="yearrow">
+<span>Facebook</span>
+<b id="fb2025"></b>
+</div>
+<div class="yearrow">
+<span>TikTok</span>
+<b id="tt2025"></b>
+</div>
+<div class="yearrow">
+<span>Total Views</span>
+<b id="total2025"></b>
+</div>
+</div>
 <div class="year">
 <h3 id="ytdTitle">2026 YTD Views</h3>
-<div class="yearrow"><span>Instagram</span><b id="ig2026"></b></div>
-<div class="yearrow"><span>Facebook</span><b id="fb2026"></b></div>
-<div class="yearrow"><span>TikTok</span><b id="tt2026"></b></div>
-<div class="yearrow"><span>Total Views</span><b id="total2026"></b></div>
+<div class="yearrow">
+<span>Instagram</span>
+<b id="ig2026"></b>
 </div>
-
+<div class="yearrow">
+<span>Facebook</span>
+<b id="fb2026"></b>
+</div>
+<div class="yearrow">
+<span>TikTok</span>
+<b id="tt2026"></b>
+</div>
+<div class="yearrow">
+<span>Total Views</span>
+<b id="total2026"></b>
 </div>
 </div>
-
+</div>
+</div>
+<!-- YEARLY FOLLOWERS -->
+<div class="card">
+<h2>Follower Growth</h2>
+<div class="yearbox">
+<div class="year">
+<h3>2025 Ending Followers</h3>
+<div class="yearrow">
+<span>Instagram</span>
+<b id="igFollowers2025"></b>
+</div>
+<div class="yearrow">
+<span>Facebook</span>
+<b id="fbFollowers2025"></b>
+</div>
+<div class="yearrow">
+<span>TikTok</span>
+<b id="ttFollowers2025"></b>
+</div>
+<div class="yearrow">
+<span>Total Followers</span>
+<b id="totalFollowers2025"></b>
+</div>
+</div>
+<div class="year">
+<h3 id="followersYtdTitle">2026 Current Followers</h3>
+<div class="yearrow">
+<span>Instagram</span>
+<b id="igFollowers2026"></b>
+</div>
+<div class="yearrow">
+<span>Facebook</span>
+<b id="fbFollowers2026"></b>
+</div>
+<div class="yearrow">
+<span>TikTok</span>
+<b id="ttFollowers2026"></b>
+</div>
+<div class="yearrow">
+<span>Total Followers</span>
+<b id="totalFollowers2026"></b>
+</div>
+</div>
+</div>
+</div>
+<!-- MONTH TO MONTH GAINS -->
+<div class="card">
+<h2>Month-to-Month Gains</h2>
+<div class="note" id="gainMonth"></div>
+<div class="gainbox">
+<div class="gain">
+<h3>Views Gained</h3>
+<div class="gainrow">
+<span>Instagram</span>
+<b id="igViewGain"></b>
+</div>
+<div class="gainrow">
+<span>Facebook</span>
+<b id="fbViewGain"></b>
+</div>
+<div class="gainrow">
+<span>TikTok</span>
+<b id="ttViewGain"></b>
+</div>
+<div class="gainrow">
+<span>Total Views</span>
+<b id="totalViewGain"></b>
+</div>
+</div>
+<div class="gain">
+<h3>Followers Gained</h3>
+<div class="gainrow">
+<span>Instagram</span>
+<b id="igFollowerGain"></b>
+</div>
+<div class="gainrow">
+<span>Facebook</span>
+<b id="fbFollowerGain"></b>
+</div>
+<div class="gainrow">
+<span>TikTok</span>
+<b id="ttFollowerGain"></b>
+</div>
+<div class="gainrow">
+<span>Total Followers</span>
+<b id="totalFollowerGain"></b>
+</div>
+</div>
+</div>
+</div>
 </main>
-
 <script>
-
 const months=[
 "Jan '25","Feb '25","Mar '25","Apr '25","May '25","Jun '25",
 "Jul '25","Aug '25","Sep '25","Oct '25","Nov '25","Dec '25",
 "Jan '26","Feb '26","Mar '26","Apr '26","May '26","Jun '26",
 "Jul '26","Aug '26"
 ];
-
 const views={
-
 Instagram:[
 10000,16000,19000,54000,24000,37000,
 123000,301000,457000,3100000,3000000,2900000,
 1600000,2400000,921000,806000,593000,893000,
 911000,3300000
 ],
-
 Facebook:[
 2600,1700,4400,2100,2400,2700,
 6000,505000,3700000,3600000,1500000,2400000,
 1500000,2500000,1500000,1600000,1500000,2600000,
 6700000,8400000
 ],
-
 TikTok:[
 3000,1900,2200,1200,2600,3000,
 3300,5500,7500,203000,1100000,143000,
 229000,200000,276000,330000,200000,150000,
 170000,100000
 ]
-
 };
-
 const followers={
-
 Instagram:[
 1500,1600,1800,1900,2700,2900,
 3000,3200,3300,3800,6200,8300,
 11000,13000,15000,16000,17000,18000,
 20000,22600
 ],
-
 Facebook:[
 2800,2900,3000,3000,3100,3100,
 3200,3300,3300,3400,3500,8000,
 10000,13000,15000,17300,18800,20000,
 22300,29200
 ],
-
 TikTok:[
 0,0,0,0,10,40,
 50,78,150,700,1400,1700,
 2000,2200,2900,3200,3500,3700,
 3900,4600
 ]
-
 };
-
 let mode="views";
 let index=19;
-
 function formatNumber(n){
-
 if(n>=1000000)
 return (n/1000000).toFixed(n%1000000?1:0)+"M";
-
 if(n>=1000)
 return (n/1000).toFixed(n%1000?1:0)+"K";
-
 return n.toLocaleString();
-
 }
-
 function exact(n){
 return n.toLocaleString();
 }
-
 function sum(arr,start,end){
-
 let total=0;
-
 for(let i=start;i<=end;i++)
 total+=arr[i];
-
 return total;
-
 }
-
+/* YEAR TOTALS */
 function updateYearTotals(){
-
-/* 2025 = Jan-Dec */
+/* 2025 Views */
 let ig25=sum(views.Instagram,0,11);
 let fb25=sum(views.Facebook,0,11);
 let tt25=sum(views.TikTok,0,11);
-
 document.getElementById("ig2025").textContent=formatNumber(ig25);
 document.getElementById("fb2025").textContent=formatNumber(fb25);
 document.getElementById("tt2025").textContent=formatNumber(tt25);
-
 document.getElementById("total2025").textContent=
 formatNumber(ig25+fb25+tt25);
-
-/* 2026 YTD */
-let end=index<12?11:index;
-
+/* 2026 Views */
 let ig26=0;
 let fb26=0;
 let tt26=0;
-
 if(index>=12){
-
 ig26=sum(views.Instagram,12,index);
 fb26=sum(views.Facebook,12,index);
 tt26=sum(views.TikTok,12,index);
-
 }
-
 document.getElementById("ig2026").textContent=formatNumber(ig26);
 document.getElementById("fb2026").textContent=formatNumber(fb26);
 document.getElementById("tt2026").textContent=formatNumber(tt26);
-
 document.getElementById("total2026").textContent=
 formatNumber(ig26+fb26+tt26);
-
 document.getElementById("ytdTitle").textContent=
-index>=12
-?"2026 YTD Views"
-:"2026 YTD Views";
+"2026 YTD Views";
+/* 2025 Ending Followers */
+let igFollowers25=followers.Instagram[11];
+let fbFollowers25=followers.Facebook[11];
+let ttFollowers25=followers.TikTok[11];
+document.getElementById("igFollowers2025").textContent=
+formatNumber(igFollowers25);
+document.getElementById("fbFollowers2025").textContent=
+formatNumber(fbFollowers25);
+document.getElementById("ttFollowers2025").textContent=
+formatNumber(ttFollowers25);
+document.getElementById("totalFollowers2025").textContent=
+formatNumber(
+igFollowers25+
+fbFollowers25+
+ttFollowers25
+);
+/* 2026 Current Followers */
+let igFollowers26=0;
+let fbFollowers26=0;
+let ttFollowers26=0;
+if(index>=12){
+igFollowers26=followers.Instagram[index];
+fbFollowers26=followers.Facebook[index];
+ttFollowers26=followers.TikTok[index];
 }
-
+document.getElementById("igFollowers2026").textContent=
+formatNumber(igFollowers26);
+document.getElementById("fbFollowers2026").textContent=
+formatNumber(fbFollowers26);
+document.getElementById("ttFollowers2026").textContent=
+formatNumber(ttFollowers26);
+document.getElementById("totalFollowers2026").textContent=
+formatNumber(
+igFollowers26+
+fbFollowers26+
+ttFollowers26
+);
+document.getElementById("followersYtdTitle").textContent=
+"2026 Current Followers";
+}
+/* MONTH TO MONTH GAINS */
+function updateGains(){
+if(index===0){
+document.getElementById("gainMonth").textContent=
+"January 2025 — no previous month available";
+["igViewGain","fbViewGain","ttViewGain","totalViewGain",
+"igFollowerGain","fbFollowerGain","ttFollowerGain",
+"totalFollowerGain"].forEach(function(id){
+document.getElementById(id).textContent="—";
+});
+return;
+}
+let igViewGain=
+views.Instagram[index]-views.Instagram[index-1];
+let fbViewGain=
+views.Facebook[index]-views.Facebook[index-1];
+let ttViewGain=
+views.TikTok[index]-views.TikTok[index-1];
+let totalViewGain=
+igViewGain+fbViewGain+ttViewGain;
+let igFollowerGain=
+followers.Instagram[index]-followers.Instagram[index-1];
+let fbFollowerGain=
+followers.Facebook[index]-followers.Facebook[index-1];
+let ttFollowerGain=
+followers.TikTok[index]-followers.TikTok[index-1];
+let totalFollowerGain=
+igFollowerGain+fbFollowerGain+ttFollowerGain;
+document.getElementById("gainMonth").textContent=
+months[index]+" compared with "+months[index-1];
+setGain("igViewGain",igViewGain);
+setGain("fbViewGain",fbViewGain);
+setGain("ttViewGain",ttViewGain);
+setGain("totalViewGain",totalViewGain);
+setGain("igFollowerGain",igFollowerGain);
+setGain("fbFollowerGain",fbFollowerGain);
+setGain("ttFollowerGain",ttFollowerGain);
+setGain("totalFollowerGain",totalFollowerGain);
+}
+function setGain(id,value){
+let el=document.getElementById(id);
+if(value>0)
+el.textContent="+"+formatNumber(value);
+else if(value<0)
+el.textContent=formatNumber(value);
+else
+el.textContent="0";
+}
+/* MAIN DISPLAY */
 function draw(){
-
 let data=mode==="views"?views:followers;
-
 let names=["Instagram","Facebook","TikTok"];
-
 let vals=names.map(function(n){
 return data[n][index];
 });
-
 document.getElementById("month").textContent=months[index];
-
 let box=document.getElementById("metrics");
-
 box.innerHTML="";
-
 let classes=["instagram","facebook","tiktok"];
-
 names.forEach(function(n,j){
-
 box.innerHTML+=
 '<div class="metric '+classes[j]+'">'+
 '<small>'+n+'</small>'+
 '<b>'+formatNumber(vals[j])+'</b>'+
 '</div>';
-
 });
-
 box.innerHTML+=
 '<div class="metric total">'+
 '<small>Total</small>'+
 '<b>'+formatNumber(vals[0]+vals[1]+vals[2])+'</b>'+
 '</div>';
-
 drawChart(data,names);
-
 updateYearTotals();
-
+updateGains();
 }
-
+/* CHART */
 function drawChart(data,names){
-
 let canvas=document.getElementById("chart");
 let ctx=canvas.getContext("2d");
-
 let W=canvas.width;
 let H=canvas.height;
-
 let L=60;
 let R=20;
 let T=20;
 let B=45;
-
 let PW=W-L-R;
 let PH=H-T-B;
-
 ctx.clearRect(0,0,W,H);
-
 let all=[];
-
 names.forEach(function(n){
 all=all.concat(data[n]);
 });
-
 let max=Math.max.apply(null,all)||1;
-
 ctx.fillStyle="#fafafa";
 ctx.fillRect(L,T,PW,PH);
-
 ctx.font="12px Arial";
 ctx.fillStyle="#777";
 ctx.strokeStyle="#e5e5e5";
 ctx.lineWidth=1;
-
 for(let g=0;g<=4;g++){
-
 let y=T+PH*g/4;
 let value=max*(1-g/4);
-
 ctx.beginPath();
 ctx.moveTo(L,y);
 ctx.lineTo(W-R,y);
 ctx.stroke();
-
 ctx.fillText(formatNumber(value),5,y+4);
-
 }
-
 let colors=["#d62976","#1877f2","#111"];
-
 names.forEach(function(name,j){
-
 let arr=data[name];
-
 ctx.strokeStyle=colors[j];
 ctx.lineWidth=3;
-
 ctx.beginPath();
-
 arr.forEach(function(value,k){
-
 let x=L+PW*k/19;
 let y=T+PH-(value/max)*PH;
-
 if(k===0)
 ctx.moveTo(x,y);
 else
 ctx.lineTo(x,y);
-
 });
-
 ctx.stroke();
-
 let x=L+PW*index/19;
 let y=T+PH-(arr[index]/max)*PH;
-
 ctx.fillStyle=colors[j];
-
 ctx.beginPath();
 ctx.arc(x,y,6,0,Math.PI*2);
 ctx.fill();
-
 });
-
 }
-
+/* SLIDER */
 document.getElementById("slider").addEventListener("input",function(){
-
 index=Number(this.value);
 draw();
-
 });
-
+/* VIEWS BUTTON */
 document.getElementById("viewsBtn").addEventListener("click",function(){
-
 mode="views";
-
 this.className="active";
 document.getElementById("followersBtn").className="";
-
 draw();
-
 });
-
+/* FOLLOWERS BUTTON */
 document.getElementById("followersBtn").addEventListener("click",function(){
-
 mode="followers";
-
 this.className="active";
 document.getElementById("viewsBtn").className="";
-
 draw();
-
 });
-
 draw();
-
 </script>
-
 </body>
 </html>
