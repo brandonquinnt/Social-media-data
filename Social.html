@@ -1,243 +1,680 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>K&M Sheet Metal | Social Media Data</title>
 <style>
-*{
-  box-sizing:border-box;
+*{box-sizing:border-box}
+html,body{
+margin:0 !important;
+padding:0 !important;
+background:#000 !important;
+color:#fff !important;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+min-height:100%;
 }
-html,
-body{
-  margin:0 !important;
-  padding:0 !important;
-  background:#000000 !important;
-  color:#ffffff !important;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  min-height:100%;
-}
-body{
-  background:#000000 !important;
-}
+body{background:#000 !important}
 main{
-  max-width:900px;
-  margin:auto;
-  padding:22px 16px 40px;
-  background:#000000 !important;
-  min-height:100vh;
+max-width:900px;
+margin:auto;
+padding:22px 16px 40px;
+background:#000 !important;
+min-height:100vh
 }
-/* K&M HEADER */
+/* HEADER */
 h1{
-  margin:0;
-  font-size:30px;
-  font-weight:900;
-  color:#e21b23;
-  letter-spacing:-.5px;
-  text-shadow:
-    0 0 8px rgba(226,27,35,.4),
-    0 0 18px rgba(226,27,35,.2);
+margin:0;
+font-size:30px;
+font-weight:900;
+color:#e21b23;
+letter-spacing:-.5px;
+text-shadow:
+0 0 8px rgba(226,27,35,.4),
+0 0 18px rgba(226,27,35,.2)
 }
 .sub{
-  color:#aaa;
-  margin:5px 0 18px;
+color:#aaa;
+margin:5px 0 18px
 }
 /* BUTTONS */
 .tabs{
-  display:flex;
-  gap:8px;
-  margin-bottom:14px;
+display:flex;
+gap:8px;
+margin-bottom:14px
 }
 button{
-  border:1px solid #333 !important;
-  background:#111111 !important;
-  color:#ffffff !important;
-  border-radius:12px;
-  padding:11px 20px;
-  font-weight:700;
-  font-size:15px;
+border:1px solid #333 !important;
+background:#111 !important;
+color:#fff !important;
+border-radius:12px;
+padding:11px 20px;
+font-weight:700;
+font-size:15px
 }
 button.active{
-  background:#e21b23 !important;
-  color:#ffffff !important;
-  border-color:#e21b23 !important;
-  box-shadow:0 0 14px rgba(226,27,35,.4);
+background:#e21b23 !important;
+color:#fff !important;
+border-color:#e21b23 !important;
+box-shadow:0 0 14px rgba(226,27,35,.4)
 }
 /* CARDS */
 .card{
-  background:#0d0d0d !important;
-  border:1px solid #292929 !important;
-  border-radius:20px;
-  padding:16px;
-  margin-bottom:14px;
-  box-shadow:0 5px 20px rgba(0,0,0,.5);
+background:#0d0d0d !important;
+border:1px solid #292929 !important;
+border-radius:20px;
+padding:16px;
+margin-bottom:14px;
+box-shadow:0 5px 20px rgba(0,0,0,.5)
 }
 h2{
-  margin:0 0 14px;
-  font-size:21px;
-  color:#ffffff !important;
-  font-weight:800;
+margin:0 0 14px;
+font-size:21px;
+color:#fff !important;
+font-weight:800
 }
 h2:after{
-  content:"";
-  display:block;
-  width:42px;
-  height:3px;
-  background:#e21b23;
-  border-radius:5px;
-  margin-top:7px;
-  box-shadow:0 0 8px rgba(226,27,35,.5);
+content:"";
+display:block;
+width:42px;
+height:3px;
+background:#e21b23;
+border-radius:5px;
+margin-top:7px;
+box-shadow:0 0 8px rgba(226,27,35,.5)
 }
 /* METRICS */
 .metrics{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:9px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:9px
 }
 .metric{
-  border-radius:14px;
-  padding:12px;
-  border-left:5px solid #777;
-  background:#181818 !important;
+border-radius:14px;
+padding:12px;
+border-left:5px solid #777;
+background:#181818 !important
 }
 .metric small{
-  display:block;
-  color:#999 !important;
+display:block;
+color:#999 !important
 }
 .metric b{
-  font-size:21px;
-  display:block;
-  margin-top:4px;
-  color:#ffffff !important;
+font-size:21px;
+display:block;
+margin-top:4px;
+color:#fff !important
 }
-.instagram{
-  border-left-color:#d62976;
-}
-.facebook{
-  border-left-color:#1877f2;
-}
-.tiktok{
-  border-left-color:#111;
-}
+.instagram{border-left-color:#d62976}
+.facebook{border-left-color:#1877f2}
+.tiktok{border-left-color:#fff}
 .total{
-  border-left-color:#e21b23;
+border-left-color:#e21b23
 }
 /* YEAR BOXES */
 .yearbox{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px
 }
 .year{
-  border-radius:15px;
-  padding:15px;
-  background:#181818 !important;
-  border:1px solid #292929 !important;
+border-radius:15px;
+padding:15px;
+background:#181818 !important;
+border:1px solid #292929 !important
 }
 .year h3{
-  margin:0 0 10px;
-  font-size:17px;
-  color:#e21b23 !important;
+margin:0 0 10px;
+font-size:17px;
+color:#e21b23 !important;
+text-shadow:0 0 7px rgba(226,27,35,.25)
 }
 .yearrow{
-  display:flex;
-  justify-content:space-between;
-  padding:5px 0;
-  border-bottom:1px solid #292929 !important;
-  font-size:14px;
-  color:#ffffff !important;
+display:flex;
+justify-content:space-between;
+padding:5px 0;
+border-bottom:1px solid #292929 !important;
+font-size:14px;
+color:#fff !important
 }
 .yearrow:last-child{
-  border-bottom:0;
-  font-weight:800;
+border-bottom:0;
+font-weight:800
 }
 /* GAINS */
 .gainbox{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px
 }
 .gain{
-  border-radius:15px;
-  padding:15px;
-  background:#181818 !important;
-  border:1px solid #292929 !important;
+border-radius:15px;
+padding:15px;
+background:#181818 !important;
+border:1px solid #292929 !important
 }
 .gain h3{
-  margin:0 0 10px;
-  font-size:17px;
-  color:#e21b23 !important;
+margin:0 0 10px;
+font-size:17px;
+color:#e21b23 !important;
+text-shadow:0 0 7px rgba(226,27,35,.25)
 }
 .gainrow{
-  display:flex;
-  justify-content:space-between;
-  padding:7px 0;
-  border-bottom:1px solid #292929 !important;
-  font-size:14px;
-  color:#ffffff !important;
+display:flex;
+justify-content:space-between;
+padding:7px 0;
+border-bottom:1px solid #292929 !important;
+font-size:14px;
+color:#fff !important
 }
 .gainrow:last-child{
-  border-bottom:0;
-  font-weight:800;
+border-bottom:0;
+font-weight:800
 }
 .positive{
-  font-weight:800;
-  color:#4ade80 !important;
+font-weight:800;
+color:#4ade80 !important
 }
 .negative{
-  font-weight:800;
-  color:#ff5a5f !important;
+font-weight:800;
+color:#ff5a5f !important
 }
 /* CHART */
 canvas{
-  width:100%;
-  height:auto;
-  margin-top:18px;
-  display:block;
-  background:#0d0d0d !important;
-  border-radius:12px;
+width:100%;
+height:auto;
+margin-top:18px;
+display:block;
+background:#0d0d0d !important;
+border-radius:12px
 }
 /* SLIDER */
 input{
-  width:100%;
-  height:38px;
-  margin-top:10px;
-  accent-color:#e21b23;
-  background:#111111 !important;
+width:100%;
+height:38px;
+margin-top:10px;
+accent-color:#e21b23;
+background:#111 !important
+}
+.ends{
+display:flex;
+justify-content:space-between;
+color:#777 !important;
+font-size:12px
 }
 /* LEGEND */
-.ends{
-  display:flex;
-  justify-content:space-between;
-  color:#777 !important;
-  font-size:12px;
-}
 .legend{
-  display:flex;
-  gap:18px;
-  flex-wrap:wrap;
-  margin-top:10px;
-  font-size:13px;
-  color:#bbb !important;
+display:flex;
+gap:18px;
+flex-wrap:wrap;
+margin-top:10px;
+font-size:13px;
+color:#bbb !important
 }
 .dot{
-  display:inline-block;
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  margin-right:5px;
+display:inline-block;
+width:10px;
+height:10px;
+border-radius:50%;
+margin-right:5px
 }
 .note{
-  font-size:13px;
-  color:#777 !important;
-  margin-top:-5px;
-  margin-bottom:12px;
+font-size:13px;
+color:#777 !important;
+margin-top:-5px;
+margin-bottom:12px
 }
 /* MOBILE */
 @media(max-width:600px){
-  .metrics{
-    grid-template-columns:repeat(2,1fr);
-  }
-  .yearbox,
-  .gainbox{
-    grid-template-columns:1fr;
-  }
-  h1{
-    font-size:27px;
-  }
+.metrics{
+grid-template-columns:repeat(2,1fr)
+}
+.yearbox,.gainbox{
+grid-template-columns:1fr
+}
+h1{
+font-size:27px
+}
 }
 </style>
+</head>
+<body>
+<main>
+<h1>K&M Sheet Metal</h1>
+<div class="sub">Social Media Data • Interactive Monthly Performance</div>
+<div class="tabs">
+<button id="viewsBtn" class="active">Views</button>
+<button id="followersBtn">Followers</button>
+</div>
+<div class="card">
+<h2 id="month"></h2>
+<div class="metrics" id="metrics"></div>
+<canvas id="chart" width="860" height="380"></canvas>
+<div class="legend">
+<span><i class="dot" style="background:#d62976"></i>Instagram</span>
+<span><i class="dot" style="background:#1877f2"></i>Facebook</span>
+<span><i class="dot" style="background:#fff"></i>TikTok</span>
+</div>
+<input id="slider" type="range" min="0" max="19" value="19" step="1">
+<div class="ends">
+<span>Jan '25</span>
+<span>Aug '26</span>
+</div>
+</div>
+<!-- YEARLY TOTALS -->
+<div class="card">
+<h2>Year-to-Date & Annual Totals</h2>
+<div class="yearbox">
+<div class="year">
+<h3>2025 Total Views</h3>
+<div class="yearrow">
+<span>Instagram</span>
+<b id="ig2025"></b>
+</div>
+<div class="yearrow">
+<span>Facebook</span>
+<b id="fb2025"></b>
+</div>
+<div class="yearrow">
+<span>TikTok</span>
+<b id="tt2025"></b>
+</div>
+<div class="yearrow">
+<span>Total Views</span>
+<b id="total2025"></b>
+</div>
+</div>
+<div class="year">
+<h3 id="ytdTitle">2026 YTD Views</h3>
+<div class="yearrow">
+<span>Instagram</span>
+<b id="ig2026"></b>
+</div>
+<div class="yearrow">
+<span>Facebook</span>
+<b id="fb2026"></b>
+</div>
+<div class="yearrow">
+<span>TikTok</span>
+<b id="tt2026"></b>
+</div>
+<div class="yearrow">
+<span>Total Views</span>
+<b id="total2026"></b>
+</div>
+</div>
+</div>
+</div>
+<!-- YEARLY FOLLOWERS -->
+<div class="card">
+<h2>Follower Growth</h2>
+<div class="yearbox">
+<div class="year">
+<h3>2025 Ending Followers</h3>
+<div class="yearrow">
+<span>Instagram</span>
+<b id="igFollowers2025"></b>
+</div>
+<div class="yearrow">
+<span>Facebook</span>
+<b id="fbFollowers2025"></b>
+</div>
+<div class="yearrow">
+<span>TikTok</span>
+<b id="ttFollowers2025"></b>
+</div>
+<div class="yearrow">
+<span>Total Followers</span>
+<b id="totalFollowers2025"></b>
+</div>
+</div>
+<div class="year">
+<h3 id="followersYtdTitle">2026 Current Followers</h3>
+<div class="yearrow">
+<span>Instagram</span>
+<b id="igFollowers2026"></b>
+</div>
+<div class="yearrow">
+<span>Facebook</span>
+<b id="fbFollowers2026"></b>
+</div>
+<div class="yearrow">
+<span>TikTok</span>
+<b id="ttFollowers2026"></b>
+</div>
+<div class="yearrow">
+<span>Total Followers</span>
+<b id="totalFollowers2026"></b>
+</div>
+</div>
+</div>
+</div>
+<!-- MONTH TO MONTH GAINS -->
+<div class="card">
+<h2>Month-to-Month Gains</h2>
+<div class="note" id="gainMonth"></div>
+<div class="gainbox">
+<div class="gain">
+<h3>Views Gained</h3>
+<div class="gainrow">
+<span>Instagram</span>
+<b id="igViewGain"></b>
+</div>
+<div class="gainrow">
+<span>Facebook</span>
+<b id="fbViewGain"></b>
+</div>
+<div class="gainrow">
+<span>TikTok</span>
+<b id="ttViewGain"></b>
+</div>
+<div class="gainrow">
+<span>Total Views</span>
+<b id="totalViewGain"></b>
+</div>
+</div>
+<div class="gain">
+<h3>Followers Gained</h3>
+<div class="gainrow">
+<span>Instagram</span>
+<b id="igFollowerGain"></b>
+</div>
+<div class="gainrow">
+<span>Facebook</span>
+<b id="fbFollowerGain"></b>
+</div>
+<div class="gainrow">
+<span>TikTok</span>
+<b id="ttFollowerGain"></b>
+</div>
+<div class="gainrow">
+<span>Total Followers</span>
+<b id="totalFollowerGain"></b>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+const months=[
+"Jan '25","Feb '25","Mar '25","Apr '25","May '25","Jun '25",
+"Jul '25","Aug '25","Sep '25","Oct '25","Nov '25","Dec '25",
+"Jan '26","Feb '26","Mar '26","Apr '26","May '26","Jun '26",
+"Jul '26","Aug '26"
+];
+const views={
+Instagram:[
+10000,16000,19000,54000,24000,37000,
+123000,301000,457000,3100000,3000000,2900000,
+1600000,2400000,921000,806000,593000,893000,
+911000,3300000
+],
+Facebook:[
+2600,1700,4400,2100,2400,2700,
+6000,505000,3700000,3600000,1500000,2400000,
+1500000,2500000,1500000,1600000,1500000,2600000,
+6700000,8400000
+],
+TikTok:[
+3000,1900,2200,1200,2600,3000,
+3300,5500,7500,203000,1100000,143000,
+229000,200000,276000,330000,200000,150000,
+170000,100000
+]
+};
+const followers={
+Instagram:[
+1500,1600,1800,1900,2700,2900,
+3000,3200,3300,3800,6200,8300,
+11000,13000,15000,16000,17000,18000,
+20000,22600
+],
+Facebook:[
+2800,2900,3000,3000,3100,3100,
+3200,3300,3300,3400,3500,8000,
+10000,13000,15000,17300,18800,20000,
+22300,29200
+],
+TikTok:[
+0,0,0,0,10,40,
+50,78,150,700,1400,1700,
+2000,2200,2900,3200,3500,3700,
+3900,4600
+]
+};
+let mode="views";
+let index=19;
+function formatNumber(n){
+if(n>=1000000)
+return (n/1000000).toFixed(n%1000000?1:0)+"M";
+if(n>=1000)
+return (n/1000).toFixed(n%1000?1:0)+"K";
+return n.toLocaleString();
+}
+function sum(arr,start,end){
+let total=0;
+for(let i=start;i<=end;i++)
+total+=arr[i];
+return total;
+}
+/* YEAR TOTALS */
+function updateYearTotals(){
+let ig25=sum(views.Instagram,0,11);
+let fb25=sum(views.Facebook,0,11);
+let tt25=sum(views.TikTok,0,11);
+document.getElementById("ig2025").textContent=formatNumber(ig25);
+document.getElementById("fb2025").textContent=formatNumber(fb25);
+document.getElementById("tt2025").textContent=formatNumber(tt25);
+document.getElementById("total2025").textContent=
+formatNumber(ig25+fb25+tt25);
+let ig26=0;
+let fb26=0;
+let tt26=0;
+if(index>=12){
+ig26=sum(views.Instagram,12,index);
+fb26=sum(views.Facebook,12,index);
+tt26=sum(views.TikTok,12,index);
+}
+document.getElementById("ig2026").textContent=formatNumber(ig26);
+document.getElementById("fb2026").textContent=formatNumber(fb26);
+document.getElementById("tt2026").textContent=formatNumber(tt26);
+document.getElementById("total2026").textContent=
+formatNumber(ig26+fb26+tt26);
+let igFollowers25=followers.Instagram[11];
+let fbFollowers25=followers.Facebook[11];
+let ttFollowers25=followers.TikTok[11];
+document.getElementById("igFollowers2025").textContent=
+formatNumber(igFollowers25);
+document.getElementById("fbFollowers2025").textContent=
+formatNumber(fbFollowers25);
+document.getElementById("ttFollowers2025").textContent=
+formatNumber(ttFollowers25);
+document.getElementById("totalFollowers2025").textContent=
+formatNumber(
+igFollowers25+
+fbFollowers25+
+ttFollowers25
+);
+let igFollowers26=0;
+let fbFollowers26=0;
+let ttFollowers26=0;
+if(index>=12){
+igFollowers26=followers.Instagram[index];
+fbFollowers26=followers.Facebook[index];
+ttFollowers26=followers.TikTok[index];
+}
+document.getElementById("igFollowers2026").textContent=
+formatNumber(igFollowers26);
+document.getElementById("fbFollowers2026").textContent=
+formatNumber(fbFollowers26);
+document.getElementById("ttFollowers2026").textContent=
+formatNumber(ttFollowers26);
+document.getElementById("totalFollowers2026").textContent=
+formatNumber(
+igFollowers26+
+fbFollowers26+
+ttFollowers26
+);
+}
+/* MONTH TO MONTH GAINS */
+function updateGains(){
+if(index===0){
+document.getElementById("gainMonth").textContent=
+"January 2025 — no previous month available";
+[
+"igViewGain","fbViewGain","ttViewGain","totalViewGain",
+"igFollowerGain","fbFollowerGain","ttFollowerGain",
+"totalFollowerGain"
+].forEach(function(id){
+document.getElementById(id).textContent="—";
+});
+return;
+}
+let igViewGain=
+views.Instagram[index]-views.Instagram[index-1];
+let fbViewGain=
+views.Facebook[index]-views.Facebook[index-1];
+let ttViewGain=
+views.TikTok[index]-views.TikTok[index-1];
+let totalViewGain=
+igViewGain+fbViewGain+ttViewGain;
+let igFollowerGain=
+followers.Instagram[index]-followers.Instagram[index-1];
+let fbFollowerGain=
+followers.Facebook[index]-followers.Facebook[index-1];
+let ttFollowerGain=
+followers.TikTok[index]-followers.TikTok[index-1];
+let totalFollowerGain=
+igFollowerGain+fbFollowerGain+ttFollowerGain;
+document.getElementById("gainMonth").textContent=
+months[index]+" compared with "+months[index-1];
+setGain("igViewGain",igViewGain);
+setGain("fbViewGain",fbViewGain);
+setGain("ttViewGain",ttViewGain);
+setGain("totalViewGain",totalViewGain);
+setGain("igFollowerGain",igFollowerGain);
+setGain("fbFollowerGain",fbFollowerGain);
+setGain("ttFollowerGain",ttFollowerGain);
+setGain("totalFollowerGain",totalFollowerGain);
+}
+function setGain(id,value){
+let el=document.getElementById(id);
+if(value>0)
+el.textContent="+"+formatNumber(value);
+else if(value<0)
+el.textContent=formatNumber(value);
+else
+el.textContent="0";
+}
+/* MAIN DISPLAY */
+function draw(){
+let data=mode==="views"?views:followers;
+let names=["Instagram","Facebook","TikTok"];
+let vals=names.map(function(n){
+return data[n][index];
+});
+document.getElementById("month").textContent=months[index];
+let box=document.getElementById("metrics");
+box.innerHTML="";
+let classes=["instagram","facebook","tiktok"];
+names.forEach(function(n,j){
+box.innerHTML+=
+'<div class="metric '+classes[j]+'">'+
+'<small>'+n+'</small>'+
+'<b>'+formatNumber(vals[j])+'</b>'+
+'</div>';
+});
+box.innerHTML+=
+'<div class="metric total">'+
+'<small>Total</small>'+
+'<b>'+formatNumber(vals[0]+vals[1]+vals[2])+'</b>'+
+'</div>';
+drawChart(data,names);
+updateYearTotals();
+updateGains();
+}
+/* CHART */
+function drawChart(data,names){
+let canvas=document.getElementById("chart");
+let ctx=canvas.getContext("2d");
+let W=canvas.width;
+let H=canvas.height;
+let L=60;
+let R=20;
+let T=20;
+let B=45;
+let PW=W-L-R;
+let PH=H-T-B;
+ctx.clearRect(0,0,W,H);
+let all=[];
+names.forEach(function(n){
+all=all.concat(data[n]);
+});
+let max=Math.max.apply(null,all)||1;
+/* BLACK CHART */
+ctx.fillStyle="#0d0d0d";
+ctx.fillRect(L,T,PW,PH);
+/* GRID */
+ctx.font="12px Arial";
+ctx.fillStyle="#777";
+ctx.strokeStyle="#292929";
+ctx.lineWidth=1;
+for(let g=0;g<=4;g++){
+let y=T+PH*g/4;
+let value=max*(1-g/4);
+ctx.beginPath();
+ctx.moveTo(L,y);
+ctx.lineTo(W-R,y);
+ctx.stroke();
+ctx.fillText(formatNumber(value),5,y+4);
+}
+/* PLATFORM COLORS */
+let colors=[
+"#d62976",
+"#1877f2",
+"#ffffff"
+];
+names.forEach(function(name,j){
+let arr=data[name];
+ctx.strokeStyle=colors[j];
+ctx.lineWidth=3;
+ctx.beginPath();
+arr.forEach(function(value,k){
+let x=L+PW*k/19;
+let y=T+PH-(value/max)*PH;
+if(k===0)
+ctx.moveTo(x,y);
+else
+ctx.lineTo(x,y);
+});
+ctx.stroke();
+let x=L+PW*index/19;
+let y=T+PH-(arr[index]/max)*PH;
+ctx.fillStyle=colors[j];
+ctx.beginPath();
+ctx.arc(x,y,6,0,Math.PI*2);
+ctx.fill();
+});
+}
+/* SLIDER */
+document.getElementById("slider").addEventListener("input",function(){
+index=Number(this.value);
+draw();
+});
+/* VIEWS BUTTON */
+document.getElementById("viewsBtn").addEventListener("click",function(){
+mode="views";
+this.className="active";
+document.getElementById("followersBtn").className="";
+draw();
+});
+/* FOLLOWERS BUTTON */
+document.getElementById("followersBtn").addEventListener("click",function(){
+mode="followers";
+this.className="active";
+document.getElementById("viewsBtn").className="";
+draw();
+});
+draw();
+</script>
+</body>
+</html>
