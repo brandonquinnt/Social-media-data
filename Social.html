@@ -5,18 +5,15 @@
 <title>K&M Sheet Metal | Social Media Data</title>
 <style>
 *{box-sizing:border-box}
-
 html,body{
 margin:0 !important;
 padding:0 !important;
 background:#000 !important;
 color:#fff !important;
-font-family:-apple-system,BlinkMacSystemFont,“Segoe UI”,sans-serif;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 min-height:100%;
 }
-
 body{background:#000 !important}
-
 main{
 max-width:900px;
 margin:auto;
@@ -24,7 +21,6 @@ padding:22px 16px 40px;
 background:#000 !important;
 min-height:100vh
 }
-
 /* HEADER */
 h1{
 margin:0;
@@ -36,19 +32,16 @@ text-shadow:
 0 0 8px rgba(226,27,35,.4),
 0 0 18px rgba(226,27,35,.2)
 }
-
 .sub{
 color:#aaa;
 margin:5px 0 18px
 }
-
 /* BUTTONS */
 .tabs{
 display:flex;
 gap:8px;
 margin-bottom:14px
 }
-
 button{
 border:1px solid #333 !important;
 background:#111 !important;
@@ -58,14 +51,12 @@ padding:11px 20px;
 font-weight:700;
 font-size:15px
 }
-
 button.active{
 background:#e21b23 !important;
 color:#fff !important;
 border-color:#e21b23 !important;
 box-shadow:0 0 14px rgba(226,27,35,.4)
 }
-
 /* CARDS */
 .card{
 background:#0d0d0d !important;
@@ -75,16 +66,14 @@ padding:16px;
 margin-bottom:14px;
 box-shadow:0 5px 20px rgba(0,0,0,.5)
 }
-
 h2{
 margin:0 0 14px;
 font-size:21px;
 color:#fff !important;
 font-weight:800
 }
-
 h2:after{
-content:””;
+content:"";
 display:block;
 width:42px;
 height:3px;
@@ -93,62 +82,52 @@ border-radius:5px;
 margin-top:7px;
 box-shadow:0 0 8px rgba(226,27,35,.5)
 }
-
 /* METRICS */
 .metrics{
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:9px
 }
-
 .metric{
 border-radius:14px;
 padding:12px;
 border-left:5px solid #777;
 background:#181818 !important
 }
-
 .metric small{
 display:block;
 color:#999 !important
 }
-
 .metric b{
 font-size:21px;
 display:block;
 margin-top:4px;
 color:#fff !important
 }
-
 .instagram{border-left-color:#d62976}
 .facebook{border-left-color:#1877f2}
 .tiktok{border-left-color:#fff}
-
 .total{
 border-left-color:#e21b23
 }
-
 /* YEAR BOXES */
 .yearbox{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:12px
 }
-
 .year{
 border-radius:15px;
 padding:15px;
 background:#181818 !important;
 border:1px solid #292929 !important
 }
-
 .year h3{
 margin:0 0 10px;
 font-size:17px;
 color:#e21b23 !important;
 text-shadow:0 0 7px rgba(226,27,35,.25)
 }
-
 .yearrow{
 display:flex;
 justify-content:space-between;
@@ -157,33 +136,28 @@ border-bottom:1px solid #292929 !important;
 font-size:14px;
 color:#fff !important
 }
-
 .yearrow:last-child{
 border-bottom:0;
 font-weight:800
 }
-
 /* GAINS */
 .gainbox{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:12px
 }
-
 .gain{
 border-radius:15px;
 padding:15px;
 background:#181818 !important;
 border:1px solid #292929 !important
 }
-
 .gain h3{
 margin:0 0 10px;
 font-size:17px;
 color:#e21b23 !important;
 text-shadow:0 0 7px rgba(226,27,35,.25)
 }
-
 .gainrow{
 display:flex;
 justify-content:space-between;
@@ -192,22 +166,18 @@ border-bottom:1px solid #292929 !important;
 font-size:14px;
 color:#fff !important
 }
-
 .gainrow:last-child{
 border-bottom:0;
 font-weight:800
 }
-
 .positive{
 font-weight:800;
 color:#4ade80 !important
 }
-
 .negative{
 font-weight:800;
 color:#ff5a5f !important
 }
-
 /* CHART */
 canvas{
 width:100%;
@@ -217,154 +187,112 @@ display:block;
 background:#0d0d0d !important;
 border-radius:12px
 }
-
 /* =========================================
-IPHONE-STYLE GLASS SLIDER
-========================================= */
-
+   IPHONE / GLASS STYLE SLIDER
+   ========================================= */
 .slider-wrap{
 margin-top:20px;
 padding:13px 15px;
 border-radius:24px;
-
 background:rgba(255,255,255,.055);
-
 border:1px solid rgba(255,255,255,.12);
-
 box-shadow:
 inset 0 1px 1px rgba(255,255,255,.12),
 0 4px 18px rgba(0,0,0,.35);
-
 backdrop-filter:blur(12px);
 -webkit-backdrop-filter:blur(12px);
 }
-
 /* RANGE SLIDER */
-input[type=“range”]{
+input[type="range"]{
 -webkit-appearance:none;
 appearance:none;
-
 width:100%;
 height:48px;
-
 margin:0;
-
 background:transparent;
-
 accent-color:#e21b23;
-
 cursor:pointer;
 }
-
-/* WEBKIT TRACK */
-input[type=“range”]::-webkit-slider-runnable-track{
+/* SAFARI / IPHONE TRACK */
+input[type="range"]::-webkit-slider-runnable-track{
 height:14px;
-
 border-radius:999px;
-
 background:
 linear-gradient(
 to right,
 rgba(226,27,35,.95),
 rgba(226,27,35,.72)
 );
-
 border:1px solid rgba(255,255,255,.16);
-
 box-shadow:
 inset 0 1px 3px rgba(0,0,0,.5),
 0 1px 2px rgba(255,255,255,.08);
 }
-
-/* WEBKIT THUMB */
-input[type=“range”]::-webkit-slider-thumb{
+/* SAFARI / IPHONE THUMB */
+input[type="range"]::-webkit-slider-thumb{
 -webkit-appearance:none;
 appearance:none;
-
 width:32px;
 height:32px;
-
 margin-top:-10px;
-
 border-radius:50%;
-
 background:
 linear-gradient(
 145deg,
 rgba(255,255,255,.95),
 rgba(220,220,220,.72)
 );
-
 border:2px solid rgba(255,255,255,.8);
-
 box-shadow:
 0 3px 10px rgba(0,0,0,.65),
 inset 0 1px 2px rgba(255,255,255,.9);
-
 backdrop-filter:blur(8px);
 -webkit-backdrop-filter:blur(8px);
-
 transition:transform .15s ease;
 }
-
-/* THUMB TAP EFFECT */
-input[type=“range”]:active::-webkit-slider-thumb{
+/* THUMB GETS SLIGHTLY BIGGER WHILE DRAGGING */
+input[type="range"]:active::-webkit-slider-thumb{
 transform:scale(1.12);
 }
-
 /* FIREFOX TRACK */
-input[type=“range”]::-moz-range-track{
+input[type="range"]::-moz-range-track{
 height:14px;
-
 border-radius:999px;
-
 background:
 linear-gradient(
 to right,
 rgba(226,27,35,.95),
 rgba(226,27,35,.72)
 );
-
 border:1px solid rgba(255,255,255,.16);
-
 box-shadow:
 inset 0 1px 3px rgba(0,0,0,.5),
 0 1px 2px rgba(255,255,255,.08);
 }
-
 /* FIREFOX THUMB */
-input[type=“range”]::-moz-range-thumb{
+input[type="range"]::-moz-range-thumb{
 width:32px;
 height:32px;
-
 border-radius:50%;
-
 background:
 linear-gradient(
 145deg,
 rgba(255,255,255,.95),
 rgba(220,220,220,.72)
 );
-
 border:2px solid rgba(255,255,255,.8);
-
 box-shadow:
 0 3px 10px rgba(0,0,0,.65),
 inset 0 1px 2px rgba(255,255,255,.9);
 }
-
 .ends{
 display:flex;
 justify-content:space-between;
-
 color:#777 !important;
-
 font-size:12px;
-
 padding:0 3px;
 margin-top:4px
 }
-
 /* LEGEND */
 .legend{
 display:flex;
@@ -374,7 +302,6 @@ margin-top:10px;
 font-size:13px;
 color:#bbb !important
 }
-
 .dot{
 display:inline-block;
 width:10px;
@@ -382,50 +309,41 @@ height:10px;
 border-radius:50%;
 margin-right:5px
 }
-
 .note{
 font-size:13px;
 color:#777 !important;
 margin-top:-5px;
 margin-bottom:12px
 }
-
 /* MOBILE */
 @media(max-width:600px){
-
 .metrics{
 grid-template-columns:repeat(2,1fr)
 }
-
 .yearbox,.gainbox{
 grid-template-columns:1fr
 }
-
 h1{
 font-size:27px
 }
-
-/* Slightly larger touch area on phones */
+/* Larger touch area on iPhone */
 .slider-wrap{
 padding:14px 13px;
 border-radius:26px;
 }
-
-input[type=“range”]{
+input[type="range"]{
 height:52px;
 }
-
-input[type=“range”]::-webkit-slider-runnable-track{
+input[type="range"]::-webkit-slider-runnable-track{
 height:15px;
 }
-
-input[type=“range”]::-webkit-slider-thumb{
+input[type="range"]::-webkit-slider-thumb{
 width:34px;
 height:34px;
 margin-top:-9.5px;
 }
-
 }
+</style>
 </head>
 <body>
 <main>
@@ -440,21 +358,21 @@ Social Media Data • Interactive Monthly Performance
 <div class="card">
 <h2 id="month"></h2>
 <div class="metrics" id="metrics"></div>
+<canvas id="chart" width="860" height="380"></canvas>
 <div class="legend">
 <span><i class="dot" style="background:#d62976"></i>Instagram</span>
 <span><i class="dot" style="background:#1877f2"></i>Facebook</span>
 <span><i class="dot" style="background:#fff"></i>TikTok</span>
 </div>
 <div class="slider-wrap">
-
 <input
-id=“slider”
-type=“range”
-min=“0”
-max=“19”
-value=“19”
-step=“1”
-
+id="slider"
+type="range"
+min="0"
+max="19"
+value="19"
+step="1"
+>
 <div class="ends">
 <span>Jan '25</span>
 <span>Aug '26</span>
@@ -773,10 +691,15 @@ let names=["Instagram","Facebook","TikTok"];
 let vals=names.map(function(n){
 return data[n][index];
 });
-document.getElementById("month").textContent=months[index];
+document.getElementById("month").textContent=
+months[index];
 let box=document.getElementById("metrics");
 box.innerHTML="";
-let classes=["instagram","facebook","tiktok"];
+let classes=[
+"instagram",
+"facebook",
+"tiktok"
+];
 names.forEach(function(n,j){
 box.innerHTML+=
 '<div class="metric '+classes[j]+'">'+
@@ -826,7 +749,11 @@ ctx.beginPath();
 ctx.moveTo(L,y);
 ctx.lineTo(W-R,y);
 ctx.stroke();
-ctx.fillText(formatNumber(value),5,y+4);
+ctx.fillText(
+formatNumber(value),
+5,
+y+4
+);
 }
 /* PLATFORM COLORS */
 let colors=[
@@ -852,29 +779,44 @@ let x=L+PW*index/19;
 let y=T+PH-(arr[index]/max)*PH;
 ctx.fillStyle=colors[j];
 ctx.beginPath();
-ctx.arc(x,y,6,0,Math.PI*2);
+ctx.arc(
+x,
+y,
+6,
+0,
+Math.PI*2
+);
 ctx.fill();
 });
 }
 /* SLIDER */
-document.getElementById("slider").addEventListener("input",function(){
+document.getElementById("slider").addEventListener(
+"input",
+function(){
 index=Number(this.value);
 draw();
-});
+}
+);
 /* VIEWS BUTTON */
-document.getElementById("viewsBtn").addEventListener("click",function(){
+document.getElementById("viewsBtn").addEventListener(
+"click",
+function(){
 mode="views";
 this.className="active";
 document.getElementById("followersBtn").className="";
 draw();
-});
+}
+);
 /* FOLLOWERS BUTTON */
-document.getElementById("followersBtn").addEventListener("click",function(){
+document.getElementById("followersBtn").addEventListener(
+"click",
+function(){
 mode="followers";
 this.className="active";
 document.getElementById("viewsBtn").className="";
 draw();
-});
+}
+);
 draw();
 </script>
 </body>
