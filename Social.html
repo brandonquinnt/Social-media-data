@@ -145,9 +145,7 @@ color:#fff !important
 .instagram{border-left-color:#d62976}
 .facebook{border-left-color:#1877f2}
 .tiktok{border-left-color:#fff}
-.total{
-border-left-color:#e21b23
-}
+.total{border-left-color:#e21b23}
 /* YEAR BOXES */
 .yearbox{
 display:grid;
@@ -434,8 +432,8 @@ TikTok
 id="slider"
 type="range"
 min="0"
-max="7"
-value="7"
+max="8"
+value="8"
 step="1"
 >
 <div class="ends">
@@ -443,7 +441,7 @@ step="1"
 Jan '26
 </span>
 <span id="sliderEnd">
-Aug '26
+Sep '26
 </span>
 </div>
 </div>
@@ -589,7 +587,7 @@ const months=[
 "Jan '25","Feb '25","Mar '25","Apr '25","May '25","Jun '25",
 "Jul '25","Aug '25","Sep '25","Oct '25","Nov '25","Dec '25",
 "Jan '26","Feb '26","Mar '26","Apr '26","May '26","Jun '26",
-"Jul '26","Aug '26"
+"Jul '26","Aug '26","Sep '26"
 ];
 /* DATA */
 const views={
@@ -634,10 +632,10 @@ TikTok:[
 };
 /* STATE */
 let mode="views";
-let index=19;
+let index=20;
 let yearMode="2026";
 let rangeStart=12;
-let rangeEnd=19;
+let rangeEnd=20;
 /* FORMAT NUMBER */
 function formatNumber(n){
 if(n>=1000000)
@@ -663,13 +661,13 @@ index=11;
 }
 else if(modeName==="2026"){
 rangeStart=12;
-rangeEnd=19;
-index=19;
+rangeEnd=20;
+index=20;
 }
 else{
 rangeStart=0;
-rangeEnd=19;
-index=19;
+rangeEnd=20;
+index=20;
 }
 /* UPDATE SLIDER */
 let slider=document.getElementById("slider");
@@ -783,8 +781,13 @@ if(index===0){
 document.getElementById("gainMonth").textContent=
 "January 2025 — no previous month available";
 [
-"igViewGain","fbViewGain","ttViewGain","totalViewGain",
-"igFollowerGain","fbFollowerGain","ttFollowerGain",
+"igViewGain",
+"fbViewGain",
+"ttViewGain",
+"totalViewGain",
+"igFollowerGain",
+"fbFollowerGain",
+"ttFollowerGain",
 "totalFollowerGain"
 ].forEach(function(id){
 document.getElementById(id).textContent="—";
