@@ -1,78 +1,338 @@
 
-/* ==========================================
-   K&M SHEET METAL
-   MONTHLY DATA ENTRY
-   ONLY CHANGE NUMBERS IN THIS SECTION
-========================================== */
-
-const months = [
-"Jan '25","Feb '25","Mar '25","Apr '25","May '25","Jun '25",
-"Jul '25","Aug '25","Sep '25","Oct '25","Nov '25","Dec '25",
-"Jan '26","Feb '26","Mar '26","Apr '26","May '26","Jun '26",
-"Jul '26","Aug '26","Sep '26","Oct '26","Nov '26","Dec '26"
+const originalData = [
+  {m:"Jan '25",y:2025,iv:10000,fv:2600,tv:3000,ig:1500,fb:2800,tt:0},
+  {m:"Feb '25",y:2025,iv:16000,fv:1700,tv:1900,ig:1600,fb:2900,tt:0},
+  {m:"Mar '25",y:2025,iv:19000,fv:4400,tv:2200,ig:1800,fb:3000,tt:0},
+  {m:"Apr '25",y:2025,iv:54000,fv:2100,tv:1200,ig:1900,fb:3000,tt:0},
+  {m:"May '25",y:2025,iv:24000,fv:2400,tv:2600,ig:2700,fb:3100,tt:10},
+  {m:"Jun '25",y:2025,iv:37000,fv:2700,tv:3000,ig:2900,fb:3100,tt:40},
+  {m:"Jul '25",y:2025,iv:123000,fv:6000,tv:3300,ig:3000,fb:3200,tt:50},
+  {m:"Aug '25",y:2025,iv:301000,fv:505000,tv:5500,ig:3200,fb:3300,tt:78},
+  {m:"Sep '25",y:2025,iv:457000,fv:3700000,tv:7500,ig:3300,fb:3300,tt:150},
+  {m:"Oct '25",y:2025,iv:3100000,fv:3600000,tv:203000,ig:3800,fb:3400,tt:700},
+  {m:"Nov '25",y:2025,iv:3000000,fv:1500000,tv:1100000,ig:6200,fb:3500,tt:1400},
+  {m:"Dec '25",y:2025,iv:2900000,fv:2400000,tv:143000,ig:8300,fb:8000,tt:1700},
+  {m:"Jan '26",y:2026,iv:1600000,fv:1500000,tv:229000,ig:11000,fb:10000,tt:2000},
+  {m:"Feb '26",y:2026,iv:2400000,fv:2500000,tv:200000,ig:13000,fb:13000,tt:2200},
+  {m:"Mar '26",y:2026,iv:921000,fv:1500000,tv:276000,ig:15000,fb:15000,tt:2900},
+  {m:"Apr '26",y:2026,iv:806000,fv:1600000,tv:330000,ig:16000,fb:17300,tt:3200},
+  {m:"May '26",y:2026,iv:593000,fv:1500000,tv:200000,ig:17000,fb:18800,tt:3500},
+  {m:"Jun '26",y:2026,iv:893000,fv:2600000,tv:150000,ig:18000,fb:20000,tt:3700},
+  {m:"Jul '26",y:2026,iv:911000,fv:6700000,tv:170000,ig:20000,fb:22300,tt:3900},
+  {m:"Aug '26",y:2026,iv:3300000,fv:8400000,tv:100000,ig:22600,fb:29200,tt:4600},
+  {m:"Sep '26",y:2026,iv:1100000,fv:5100000,tv:400000,ig:null,fb:null,tt:null},
+  {m:"Oct '26",y:2026,iv:2400000,fv:4900000,tv:750000,ig:24300,fb:35000,tt:5100},
+  {m:"Nov '26",y:2026,iv:null,fv:null,tv:null,ig:null,fb:null,tt:null},
+  {m:"Dec '26",y:2026,iv:null,fv:null,tv:null,ig:null,fb:null,tt:null}
 ];
 
-/* ==========================================
-   MONTHLY VIEWS
-========================================== */
+let data;
 
-const views = {
+try {
+  const saved = JSON.parse(localStorage.getItem('kmSocialData'));
+  data = Array.isArray(saved)
+    ? originalData.map((base, i) => ({...base, ...(saved[i] || {})}))
+    : originalData.map(d => ({...d}));
+} catch (e) {
+  data = originalData.map(d => ({...d}));
+}
 
-Instagram: [
-10000,16000,19000,54000,24000,37000,
-123000,301000,457000,3100000,3000000,2900000,
-1600000,2400000,921000,806000,593000,893000,
-911000,3700000,1100000,2300000,
-0,0
-],
-
-Facebook: [
-2600,1700,4400,2100,2400,2700,
-6000,505000,3700000,3600000,1500000,2400000,
-1500000,2500000,1500000,1600000,1500000,2600000,
-6700000,8400000,5100000,46000000,
-0,0
-],
-
-TikTok: [
-3000,1900,2200,1200,2600,3000,
-3300,5500,7500,203000,1100000,143000,
-229000,200000,276000,330000,200000,150000,
-170000,950000,400000,800000,
-0,0
-]
-
+const colors = {
+  ig: '#E1306C',
+  fb: '#1877F2',
+  tt: '#F5F5F5'
 };
 
-/* ==========================================
-   MONTHLY FOLLOWERS
-   Enter the ending follower count each month.
-========================================== */
-
-const followers = {
-
-Instagram: [
-1500,1600,1800,1900,2700,2900,
-3000,3200,3300,3800,6200,8300,
-11000,13000,15000,16000,17000,18000,
-20000,22600,23100,24200,
-24200,24200
-],
-
-Facebook: [
-2800,2900,3000,3000,3100,3100,
-3200,3300,3300,3400,3500,8000,
-10000,13000,15000,17300,18800,20000,
-22300,29200,32200,35000,
-35000,35000
-],
-
-TikTok: [
-0,0,0,0,10,40,
-50,78,150,700,1400,1700,
-2000,2200,2900,3200,3500,3700,
-3900,4600,4800,5100,
-5100,5100
-]
-
+const keys = {
+  followers: ['ig', 'fb', 'tt'],
+  views: ['iv', 'fv', 'tv']
 };
+
+const names = ['Instagram', 'Facebook', 'TikTok'];
+
+let metric = 'followers';
+let year = '2026';
+let selectedIndex = 21;
+let chart = null;
+
+const short = n => {
+  if (n == null) return '—';
+  if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+  if (n >= 1000) return (n / 1000).toFixed(n >= 100000 ? 0 : 1).replace(/\.0$/, '') + 'K';
+  return String(n);
+};
+
+const full = n => n == null ? '—' : Number(n).toLocaleString('en-US');
+
+function months() {
+  return data.map((d, i) => ({...d, i}))
+    .filter(d => year === 'all' || String(d.y) === year);
+}
+
+function current() {
+  return data[selectedIndex] || data[0];
+}
+
+function saveData() {
+  localStorage.setItem('kmSocialData', JSON.stringify(data));
+}
+
+function setMetric(value) {
+  metric = value;
+
+  document.getElementById('followersTab')
+    .classList.toggle('active', value === 'followers');
+
+  document.getElementById('viewsTab')
+    .classList.toggle('active', value === 'views');
+
+  render();
+}
+
+function setYear(value) {
+  year = value;
+
+  document.querySelectorAll('.year-btn').forEach(button => {
+    button.classList.toggle('active', button.dataset.year === value);
+  });
+
+  const list = months();
+  const latest = [...list].reverse().find(d =>
+    keys[metric].some(key => d[key] != null)
+  );
+
+  selectedIndex = latest ? latest.i : list[list.length - 1].i;
+
+  render();
+}
+
+function render() {
+  const list = months();
+
+  if (!list.some(d => d.i === selectedIndex)) {
+    selectedIndex = list[list.length - 1].i;
+  }
+
+  const d = current();
+
+  document.getElementById('monthTitle').textContent = d.m;
+  document.getElementById('selectedMonth').textContent = d.m;
+
+  const slider = document.getElementById('monthSlider');
+
+  slider.min = 0;
+  slider.max = list.length - 1;
+  slider.value = list.findIndex(x => x.i === selectedIndex);
+
+  document.getElementById('rangeStart').textContent = list[0].m;
+  document.getElementById('rangeEnd').textContent = list[list.length - 1].m;
+
+  const k = keys[metric];
+  const vals = [d[k[0]], d[k[1]], d[k[2]]];
+
+  const total = vals.every(v => v == null)
+    ? null
+    : vals.reduce((a, v) => a + (Number(v) || 0), 0);
+
+  document.getElementById('metrics').innerHTML =
+    vals.map((v, i) => `
+      <div class="metric" style="border-left-color:${Object.values(colors)[i]}">
+        <div class="label">${names[i]}</div>
+        <div class="value">${v == null ? '—' : short(v)}</div>
+        <div class="hint">${metric === 'views' ? 'Monthly views' : 'Followers'}</div>
+      </div>
+    `).join('') +
+    `
+      <div class="metric">
+        <div class="label">Total ${metric === 'views' ? 'Views' : 'Followers'}</div>
+        <div class="value">${total == null ? '—' : short(total)}</div>
+        <div class="hint">Across all platforms</div>
+      </div>
+    `;
+
+  drawChart(list);
+  drawTotals(list);
+}
+
+function drawChart(list) {
+  const k = keys[metric];
+  const ctx = document.getElementById('performanceChart').getContext('2d');
+
+  if (chart) chart.destroy();
+
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: list.map(d => d.m),
+      datasets: [
+        {
+          label: 'Instagram',
+          data: list.map(d => d[k[0]]),
+          borderColor: colors.ig,
+          backgroundColor: colors.ig,
+          tension: 0.32,
+          spanGaps: false,
+          pointRadius: list.map(d => d.i === selectedIndex ? 5 : 2),
+          borderWidth: 2.5
+        },
+        {
+          label: 'Facebook',
+          data: list.map(d => d[k[1]]),
+          borderColor: colors.fb,
+          backgroundColor: colors.fb,
+          tension: 0.32,
+          spanGaps: false,
+          pointRadius: list.map(d => d.i === selectedIndex ? 5 : 2),
+          borderWidth: 2.5
+        },
+        {
+          label: 'TikTok',
+          data: list.map(d => d[k[2]]),
+          borderColor: colors.tt,
+          backgroundColor: colors.tt,
+          tension: 0.32,
+          spanGaps: false,
+          pointRadius: list.map(d => d.i === selectedIndex ? 5 : 2),
+          borderWidth: 2.5
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: 'index',
+        intersect: false
+      },
+      plugins: {
+        legend: {
+          labels: {
+            color: '#bbb',
+            usePointStyle: true,
+            boxWidth: 8,
+            padding: 18
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: c => `${c.dataset.label}: ${full(c.raw)}`
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: '#888',
+            maxRotation: 0,
+            autoSkip: true,
+            maxTicksLimit: 12
+          },
+          grid: {display: false}
+        },
+        y: {
+          beginAtZero: true,
+          ticks: {
+            color: '#888',
+            callback: v => short(v)
+          },
+          grid: {color: '#242424'}
+        }
+      },
+      onClick: (e, elements) => {
+        if (elements.length) {
+          selectedIndex = list[elements[0].index].i;
+          render();
+        }
+      }
+    }
+  });
+}
+
+function drawTotals(list) {
+  const viewSum = key =>
+    list.reduce((sum, d) => sum + (Number(d[key]) || 0), 0);
+
+  const latest = key => {
+    for (let i = list.length - 1; i >= 0; i--) {
+      if (list[i][key] != null) return list[i][key];
+    }
+    return null;
+  };
+
+  const totalViews =
+    viewSum('iv') + viewSum('fv') + viewSum('tv');
+
+  const totalFollowers =
+    (Number(latest('ig')) || 0) +
+    (Number(latest('fb')) || 0) +
+    (Number(latest('tt')) || 0);
+
+  document.getElementById('totals').innerHTML = `
+    <div class="metric">
+      <div class="label">Total Views · selected period</div>
+      <div class="value">${short(totalViews)}</div>
+    </div>
+    <div class="metric">
+      <div class="label">Latest Combined Followers</div>
+      <div class="value">${short(totalFollowers)}</div>
+    </div>
+    <div class="metric">
+      <div class="label">Instagram Views</div>
+      <div class="value">${short(viewSum('iv'))}</div>
+    </div>
+    <div class="metric">
+      <div class="label">Facebook Views</div>
+      <div class="value">${short(viewSum('fv'))}</div>
+    </div>
+  `;
+}
+
+function renderEditor() {
+  document.getElementById('dataRows').innerHTML = data.map((d, i) => `
+    <tr>
+      <td>${d.m}</td>
+      ${['iv', 'fv', 'tv', 'ig', 'fb', 'tt'].map(k => `
+        <td>
+          <input
+            type="number"
+            min="0"
+            step="1"
+            aria-label="${d.m} ${k}"
+            value="${d[k] ?? ''}"
+            placeholder="—"
+            onchange="updateValue(${i}, '${k}', this.value)"
+          >
+        </td>
+      `).join('')}
+    </tr>
+  `).join('');
+}
+
+function updateValue(i, k, value) {
+  data[i][k] = value.trim() === '' ? null : Number(value);
+  saveData();
+  render();
+}
+
+function downloadData() {
+  const blob = new Blob(
+    [JSON.stringify(data, null, 2)],
+    {type: 'application/json'}
+  );
+
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'KM-Social-Media-Data-Backup.json';
+  a.click();
+
+  URL.revokeObjectURL(a.href);
+}
+
+document.getElementById('monthSlider').addEventListener('input', e => {
+  const list = months();
+  selectedIndex = list[Number(e.target.value)].i;
+  render();
+});
+
+renderEditor();
+render();
